@@ -1,3 +1,5 @@
+mod math;
+
 fn main() {
     // Image
 
@@ -5,7 +7,7 @@ fn main() {
     let image_height: u32 = 256;
 
     // Render
-    
+
     println!("P3\n{image_width} {image_height}\n255");
 
     for j in 0..image_height {
