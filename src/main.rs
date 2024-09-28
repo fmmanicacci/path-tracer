@@ -1,4 +1,8 @@
 mod math;
+mod pixel;
+
+use math::Vec3;
+use pixel::Color;
 
 fn main() {
     // Image
@@ -12,15 +16,14 @@ fn main() {
 
     for j in 0..image_height {
         for i in 0..image_width {
-            let r: f64 = i as f64 / (image_width - 1) as f64;
-            let g: f64 = j as f64 / (image_height - 1) as f64;
-            let b: f64 = 0.0;
-
-            let ir = (255.999 * r) as u32;
-            let ig = (255.999 * g) as u32;
-            let ib = (255.999 * b) as u32;
-
-            println!("{ir} {ig} {ib}");
+            let u = Vec3::new(
+                i as f64 / (image_width - 1) as f64,
+                j as f64 / (image_height - 1) as f64,
+                0.0
+            );
+            let c = Color::from(u);
+            
+            println!("{c}");
         }
     }
 }
