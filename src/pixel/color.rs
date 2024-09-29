@@ -8,6 +8,7 @@ use crate::math::Vec3;
 ///
 //////////////////////////////////////////////////////////////////////////////////////////////////
 
+#[derive(Debug, Copy, Clone, PartialEq)]
 pub struct Color {
     r: u8,
     g: u8,
@@ -52,20 +53,17 @@ mod tests {
 
     #[test]
     fn new() {
-        let c = Color::new(255, 0, 255);
+        let c = Color::new(255, 127, 0);
+        let expected = Color { r: 255, g: 127, b: 0};
 
-        assert_eq!(c.r, 255);
-        assert_eq!(c.g, 0);
-        assert_eq!(c.b, 255);
+        assert_eq!(c, expected);
     }
 
     #[test]
     fn from() {
-        let v = Vec3::new(1.0, 0.5, 0.0);
-        let c = Color::from(v);
+        let c = Color::from(Vec3::new(1.0, 0.5, 0.0));
+        let expected = Color { r: 255, g: 127, b: 0};
 
-        assert_eq!(c.r, 255);
-        assert_eq!(c.g, 127);
-        assert_eq!(c.b, 0);
+        assert_eq!(c, expected);
     }
 }

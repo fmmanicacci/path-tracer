@@ -1,4 +1,5 @@
 mod math;
+mod render;
 mod pixel;
 
 use math::Vec3;
