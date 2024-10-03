@@ -19,11 +19,19 @@ impl Vec3 {
         Self { x, y, z }
     }
 
-    pub fn with_zeros() -> Self {
+    pub fn zeros() -> Self {
         Self {
             x: 0.0,
             y: 0.0,
             z: 0.0,
+        }
+    }
+
+    pub fn ones() -> Self {
+        Self {
+            x: 1.0,
+            y: 1.0,
+            z: 1.0,
         }
     }
 
@@ -169,25 +177,34 @@ mod tests {
     #[test]
     fn new() {
         let v = Vec3::new(3.14, -2.16, 42.0);
-        let expected = Vec3 { x: 3.14, y: -2.16, z: 42.0 };
+        let expected = Vec3 {
+            x: 3.14,
+            y: -2.16,
+            z: 42.0,
+        };
 
         assert_eq!(v, expected);
     }
 
     #[test]
-    fn with_zeros() {
-        let v = Vec3::with_zeros();
+    fn zeros() {
+        let v = Vec3::zeros();
         let expected = Vec3::new(0.0, 0.0, 0.0);
 
         assert_eq!(v, expected);
     }
 
     #[test]
+    fn ones() {
+        let v = Vec3::ones();
+        let expected = Vec3::new(1.0, 1.0, 1.0);
+
+        assert_eq!(v, expected);
+    }
+
+    #[test]
     fn cross() {
-        let v = Vec3::cross(
-            &Vec3::new(1.0, 0.0, 0.0), 
-            &Vec3::new(0.0, 1.0, 0.0)
-        );
+        let v = Vec3::cross(&Vec3::new(1.0, 0.0, 0.0), &Vec3::new(0.0, 1.0, 0.0));
         let expected = Vec3::new(0.0, 0.0, 1.0);
 
         assert_eq!(v, expected);
@@ -195,13 +212,19 @@ mod tests {
 
     #[test]
     fn dot() {
-        let dot = Vec3::dot(
-            &Vec3::new(1.0, 2.0, 3.0), 
-            &Vec3::new(3.0, 2.0, 1.0)
-        );
+        let dot = Vec3::dot(&Vec3::new(1.0, 2.0, 3.0), &Vec3::new(3.0, 2.0, 1.0));
         let expected = 10.0;
 
         assert_eq!(dot, expected);
+    }
+
+    #[test]
+    fn unit_vector() {
+        let v = Vec3::unit_vector(&Vec3::new(3.0, 4.0, 0.0));
+        let expected = Vec3::new(3.0 / 5.0, 4.0 / 5.0, 0.0);
+
+        assert_eq!(v, expected);
+        assert_eq!(v.length_square(), 1.0);
     }
 
     #[test]
@@ -230,9 +253,9 @@ mod tests {
 
     #[test]
     fn add_assign() {
-        let mut v = Vec3::with_zeros();
+        let mut v = Vec3::zeros();
         let expected = Vec3::new(1.0, 2.0, 3.0);
-        
+
         v += Vec3::new(1.0, 2.0, 3.0);
 
         assert_eq!(v, expected);
@@ -274,7 +297,7 @@ mod tests {
     fn mul_assign() {
         let mut v = Vec3::new(1.0, 2.0, 3.0);
         let expected = Vec3::new(2.0, 4.0, 6.0);
-        
+
         v *= 2.0;
 
         assert_eq!(v, expected);

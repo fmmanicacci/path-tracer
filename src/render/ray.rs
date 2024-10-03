@@ -1,4 +1,4 @@
-use crate::math::{Vec3, Point3};
+use crate::math::{Point3, Vec3};
 
 //////////////////////////////////////////////////////////////////////////////////////////////////
 ///
@@ -8,20 +8,26 @@ use crate::math::{Vec3, Point3};
 
 #[derive(Debug, Copy, Clone, PartialEq)]
 pub struct Ray {
-    origin: Point3,
-    direction: Vec3,
+    pub origin: Point3,
+    pub direction: Vec3,
 }
 
 impl Ray {
-    fn init() -> Self {
-        Self { origin: Point3::with_zeros(), direction: Vec3::new(1.0, 0.0, 0.0) }
+    pub fn init() -> Self {
+        Self {
+            origin: Point3::zeros(),
+            direction: Vec3::new(1.0, 0.0, 0.0),
+        }
     }
 
-    fn new(origin: Point3, direction: Vec3) -> Self {
-        Self { origin: origin, direction: direction }
+    pub fn new(origin: Point3, direction: Vec3) -> Self {
+        Self {
+            origin: origin,
+            direction: direction,
+        }
     }
 
-    fn at(&self, t: f64) -> Point3 {
+    pub fn at(&self, t: f64) -> Point3 {
         self.origin + t * self.direction
     }
 }
@@ -40,8 +46,8 @@ mod tests {
     fn init() {
         let ray = Ray::init();
         let expected = Ray {
-            origin: Vec3::with_zeros(),
-            direction: Vec3::new(1.0, 0.0, 0.0)
+            origin: Vec3::zeros(),
+            direction: Vec3::new(1.0, 0.0, 0.0),
         };
 
         assert_eq!(ray, expected);
@@ -49,7 +55,7 @@ mod tests {
 
     #[test]
     fn new() {
-        let ray = Ray::new(Vec3::with_zeros(), Vec3::new(1.0, 0.0, 0.0));
+        let ray = Ray::new(Vec3::zeros(), Vec3::new(1.0, 0.0, 0.0));
         let expected = Ray::init();
 
         assert_eq!(ray, expected);

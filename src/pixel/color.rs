@@ -54,7 +54,11 @@ mod tests {
     #[test]
     fn new() {
         let c = Color::new(255, 127, 0);
-        let expected = Color { r: 255, g: 127, b: 0};
+        let expected = Color {
+            r: 255,
+            g: 127,
+            b: 0,
+        };
 
         assert_eq!(c, expected);
     }
@@ -62,7 +66,11 @@ mod tests {
     #[test]
     fn from() {
         let c = Color::from(Vec3::new(1.0, 0.5, 0.0));
-        let expected = Color { r: 255, g: 127, b: 0};
+        let expected = Color {
+            r: 255,
+            g: 127,
+            b: 0,
+        };
 
         assert_eq!(c, expected);
     }
